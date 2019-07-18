@@ -37,25 +37,25 @@ namespace FlowCheckTest.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("120")]
-        public int SearchIntervalTime {
+        [global::System.Configuration.DefaultSettingValueAttribute("3600")]
+        public int period {
             get {
-                return ((int)(this["SearchIntervalTime"]));
+                return ((int)(this["period"]));
             }
             set {
-                this["SearchIntervalTime"] = value;
+                this["period"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int Threshold {
+        public int Threshold1 {
             get {
-                return ((int)(this["Threshold"]));
+                return ((int)(this["Threshold1"]));
             }
             set {
-                this["Threshold"] = value;
+                this["Threshold1"] = value;
             }
         }
         
@@ -73,19 +73,7 @@ namespace FlowCheckTest.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#Vtuberはじめました")]
-        public string keyword1 {
-            get {
-                return ((string)(this["keyword1"]));
-            }
-            set {
-                this["keyword1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#lainTTL")]
+        [global::System.Configuration.DefaultSettingValueAttribute("バーチャルYoutuber")]
         public string keyword2 {
             get {
                 return ((string)(this["keyword2"]));
@@ -97,7 +85,7 @@ namespace FlowCheckTest.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#新人vtuber")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Vtuber")]
         public string keyword3 {
             get {
                 return ((string)(this["keyword3"]));
@@ -109,7 +97,7 @@ namespace FlowCheckTest.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("#FGO")]
+        [global::System.Configuration.DefaultSettingValueAttribute("VRChat")]
         public string keyword4 {
             get {
                 return ((string)(this["keyword4"]));
@@ -164,6 +152,66 @@ namespace FlowCheckTest.Properties {
         public string CONSUMER_SECRET {
             get {
                 return ((string)(this["CONSUMER_SECRET"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("#lainTTL")]
+        public string keyword1 {
+            get {
+                return ((string)(this["keyword1"]));
+            }
+            set {
+                this["keyword1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int Threshold2 {
+            get {
+                return ((int)(this["Threshold2"]));
+            }
+            set {
+                this["Threshold2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int Threshold3 {
+            get {
+                return ((int)(this["Threshold3"]));
+            }
+            set {
+                this["Threshold3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int Threshold4 {
+            get {
+                return ((int)(this["Threshold4"]));
+            }
+            set {
+                this["Threshold4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int Threshold5 {
+            get {
+                return ((int)(this["Threshold5"]));
+            }
+            set {
+                this["Threshold5"] = value;
             }
         }
     }
