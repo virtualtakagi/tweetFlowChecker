@@ -35,7 +35,7 @@ namespace FlowCheck
 
                 //初期開始メッセージ
                 icon.BalloonTipTitle = "FlowChecker";
-                icon.BalloonTipText = "処理を開始します";
+                icon.BalloonTipText = FlowCheckTest.Properties.Settings.Default.keyword1 + "から取得します";
 
                 //メッセージ表示時間
                 icon.ShowBalloonTip(5 * 1000);
@@ -64,22 +64,25 @@ namespace FlowCheck
                     //sleepはミリ秒指定なので1000で乗算
                     System.Threading.Thread.Sleep(FlowCheckTest.Properties.Settings.Default.SleepTime * 1000);
 
-                    //インスタンス4つを順番に渡して実行する
+                    //インスタンス5つを順番に渡して実行する
                     for (int i = 0; i < psAr.Length; i++)
                     {
                         //流速を取得
-                        int flowSpeed = getFlowSpeed(psAr[i]);
+                        psAr[i].setFlowSpeed(getFlowSpeed(psAr[i]));
 
                         //流速が閾値を超えたらタスクトレイから出力
-                        if (flowSpeed >= psAr[i].getThreshold())
+                        if (psAr[i].getFlowSpeed() >= psAr[i].getThreshold())
                         {
-                            dispNotify(createDispMsg(psAr[i], flowSpeed));
+                            dispNotify(createDispMsg(psAr[i]));
                         }
                         //流速が-1ならエラー表示
-                        else if (flowSpeed == -1)
+                        else if (psAr[i].getFlowSpeed() == -1)
                         {
                             dispError();
                         }
+
+                        //現在取得した流速をインスタンスに代入する
+                        psAr[i].setPreviousFlow(psAr[i].getFlowSpeed());
 
                         //1ループごとに1分間のSleepを行う
                         System.Threading.Thread.Sleep(60 * 1000);
@@ -104,14 +107,16 @@ namespace FlowCheck
             }
 
             //表示するメッセージ内容の作成処理
-            private StringBuilder createDispMsg(PrepareState ps, int flowSpeed)
+            private StringBuilder createDispMsg(PrepareState ps)
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append("\"");
                 sb.Append(ps.getKeyword());
                 sb.Append("\"の流速が閾値を超過。\n流速: ");
-                sb.Append(flowSpeed);
-                sb.Append(" tweet/hour\n");
+                sb.Append(ps.getFlowSpeed());
+                sb.Append(" tweet/hour (");
+                sb.Append(ps.getDifference(ps.getFlowSpeed()));
+                sb.Append(")\n");
                 sb.Append("取得率: ");
                 sb.Append(ps.getPercentage());
                 sb.Append("%");
@@ -207,6 +212,7 @@ namespace FlowCheck
                 return oldTweetTimeStamp;
             }
 
+            //現在時刻のDateTimeからUNIX時刻のDateTimeを引いて、その結果を秒数で表す
             long getUnixTimeNow()
             {
                 //UNIXエポック時刻
@@ -217,16 +223,16 @@ namespace FlowCheck
 
                 //UTC時刻に変更
                 dt = dt.ToUniversalTime();
-
-                //現在時刻のDateTimeからUNIXエポック時刻のDateTimeを引いて、その結果を秒数で表す
+                
                 return (long)dt.Subtract(dtUnixEpoch).TotalSeconds;
             }
+
+            //末尾ツイートのDateTimeOffsetからUNIX時刻のDateTimeOffsetを引いて、その結果を秒数で表す
             long getUnixTimeEnd(DateTimeOffset old)
             {
                 //UNIXエポック時刻
                 DateTimeOffset dto = new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero);
 
-                //oldのDateTimeOffsetからUNIXエポック時刻のDateTimeOffsetを引いて、その結果を秒数で表す
                 return (long)old.Subtract(dto).TotalSeconds;
             }
 
